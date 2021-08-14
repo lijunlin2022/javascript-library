@@ -71,9 +71,17 @@ DoublyLinkedList.prototype.get = function (position) {
   if (position < 0 || position > this.length - 1) {
     return null;
   }
-  var current = this.head;
-  for (var i = 0; i < position; i++) {
-    current = current.next;
+  var current = null;
+  if (position < Math.floor(this.length / 2)) {
+    current = this.head;
+    for (var i = 0; i < position; i++) {
+      current = current.next;
+    }
+  } else {
+    current = this.tail;
+    for (var i = 0; i < this.length - 1 - position; i++) {
+      current = current.prev;
+    }
   }
   return current.data;
 }

@@ -83,15 +83,15 @@ test("测试 remove 方法", () => {
 });
 
 test("测试 isEmpty 方法", () => {
-  // const doublyList = new DoublyLinkedList();
-  // doublyList.append("A");
-  // doublyList.append("B");
-  // doublyList.append("C");
-  // expect(doublyList.isEmpty()).toBe(false);
-  // doublyList.removeAt(0);
-  // doublyList.removeAt(0);
-  // doublyList.removeAt(0);
-  // expect(doublyList.isEmpty()).toBe(true);
+  const doublyList = new DoublyLinkedList();
+  doublyList.append("A");
+  doublyList.append("B");
+  doublyList.append("C");
+  expect(doublyList.isEmpty()).toBe(false);
+  doublyList.removeAt(0);
+  doublyList.removeAt(0);
+  doublyList.removeAt(0);
+  expect(doublyList.isEmpty()).toBe(true);
 });
 
 test("测试 size 方法", () => {
