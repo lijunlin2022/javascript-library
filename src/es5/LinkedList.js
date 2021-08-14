@@ -147,11 +147,10 @@ LinkedList.prototype.size = function () {
 LinkedList.prototype.toString = function () {
   var arr = [];
   var current = this.head;
-  while (current.next !== null) {
+  while (current !== null) {
     arr.push(current.data);
     current = current.next;
   }
-  arr.push(current.data);
   return "[" + arr.join(", ") + "]";
 }
 
