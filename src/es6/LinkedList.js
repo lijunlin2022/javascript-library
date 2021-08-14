@@ -131,11 +131,10 @@ class LinkedList {
   toString() {
     const arr = [];
     let current = this.head;
-    while (current.next != null) {
+    while (current != null) {
       arr.push(current.data);
       current = current.next;
     }
-    arr.push(current.data);
     return "[" + arr.join(", ") + "]";
   }
 }
