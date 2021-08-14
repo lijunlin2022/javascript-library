@@ -59,6 +59,16 @@ test("测试 indexOf 方法", () => {
   expect(doublyList.indexOf("F")).toBe(-1);
 });
 
+test("测试 update 方法", () => {
+  const doublyList = new DoublyLinkedList();
+  doublyList.append("A");
+  doublyList.append("B");
+  doublyList.update(0, "0");
+  expect(doublyList.toString()).toBe("[0, B]");
+  doublyList.update(1, "1");
+  expect(doublyList.toString()).toBe("[0, 1]");
+});
+
 test("测试 removeAt 方法", () => {
   const doublyList = new DoublyLinkedList();
   doublyList.insert(0, "E");

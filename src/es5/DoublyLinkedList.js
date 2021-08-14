@@ -191,6 +191,27 @@ DoublyLinkedList.prototype.remove = function (element) {
   return index;
 }
 
+DoublyLinkedList.prototype.update = function (position, element) {
+  if (position < 0 || position > this.length - 1) {
+    return false;
+  }
+  var current = null;
+  if (position < Math.floor(this.length / 2)) {
+    current = this.head;
+    for (var i = 0; i < position; i++) {
+      current = current.next;
+    }
+  } else {
+    current = this.tail;
+    current = this.tail;
+    for (var i = 0; i < this.length - 1 - position; i++) {
+      current = current.prev;
+    }
+  }
+  current.data = element;
+  return true;
+}
+
 DoublyLinkedList.prototype.isEmpty = function () {
   return this.length === 0;
 }
