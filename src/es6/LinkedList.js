@@ -101,23 +101,25 @@ class LinkedList {
   }
 
   remove(element) {
+    let index = -1;
     if (this.head.data === element) {
+      index = 0;
       this.head = this.head.next;
-      this.length -= 1;
-      return 0;
-    }
-    let previous = this.head;
-    let current = previous.next;
-    for (let index = 1; index < this.length; index++) {
-      if (current.data === element) {
-        previous.next = current.next;
-        this.length -= 1;
-        return index;
+    } else {
+      let previous = this.head;
+      let current = previous.next;
+      for (let i = 1; i < this.length; i++) {
+        if (current.data === element) {
+          index = i;
+          previous.next = current.next;
+          break;
+        }
+        previous = previous.next;
+        current = current.next;
       }
-      previous = previous.next;
-      current = current.next;
     }
-    return -1;
+    this.length -= 1;
+    return index;
   }
 
   isEmpty() {

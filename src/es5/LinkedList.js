@@ -37,7 +37,7 @@ LinkedList.prototype.insert = function (position, data) {
 
   var newNode = new Node(data);
   if (position === 0) {
-    // 如果在头节点进行插入
+    // 先思考 newNode 的 next
     newNode.next = this.head;
     this.head = newNode;
   } else {
@@ -45,7 +45,10 @@ LinkedList.prototype.insert = function (position, data) {
     for (var i = 0; i < position - 1; i++) {
       previous = previous.next;
     }
-    newNode.next = previous.next;
+    var current = previous.next;
+    // 先思考 newNode 的 next
+    newNode.next = current;
+    // 再思考 previous 的 next
     previous.next = newNode;
   }
   this.length += 1;
@@ -106,34 +109,36 @@ LinkedList.prototype.removeAt = function (position) {
     for (var i = 0; i < position - 1; i++) {
       previous = previous.next;
     }
-    ret = previous.next.data;
-    previous.next = previous.next.next;
+    var current = previous.next;
+    ret = current.data;
+    previous.next = current.next;
   }
   this.length -= 1;
   return ret;
 }
 
 LinkedList.prototype.remove = function (element) {
+  var index = -1;
   if (this.head.data === element) {
+    index = 0;
     this.head = this.head.next;
-    this.length -= 1;
-    return 0;
   } else {
     // 删除节点需要知道 previous 和 current 的位置,
     // 直接从 index = 1 的位置开始
     var previous = this.head;
     var current = previous.next;
-    for (var index = 1; index < this.length; index++) {
+    for (var i = 1; i < this.length; i++) {
       if (current.data === element) {
+        index = i;
         previous.next = current.next;
-        this.length -= 1;
-        return index;
+        break;
       }
       previous = previous.next;
       current = current.next;
     }
-    return -1;
   }
+  this.length -= 1;
+  return index;
 }
 
 LinkedList.prototype.isEmpty = function () {
