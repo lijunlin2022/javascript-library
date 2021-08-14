@@ -1,8 +1,7 @@
 const { PriorityQueue } = require("../../src/es5/PriorityQueue");
 
-const pq = new PriorityQueue();
-
 test("测试 enqueue", () => {
+  const pq = new PriorityQueue();
   pq.enqueue("A", 1);
   pq.enqueue("B", 3);
   pq.enqueue("C", 2);
@@ -10,18 +9,25 @@ test("测试 enqueue", () => {
 });
 
 test("测试 dequeue", () => {
-  expect(pq.dequeue().toString()).toBe("A-1");
+  const pq = new PriorityQueue();
+  pq.enqueue("A", 2);
+  pq.enqueue("B", 1);
+  expect(pq.dequeue().toString()).toBe("B-1");
+  expect(pq.dequeue().toString()).toBe("A-2");
 });
 
-test("测试 front", () => {
-  expect(pq.front().toString()).toBe("C-2");
-});
-
-test("测试 back", () => {
-  expect(pq.back().toString()).toBe("B-3");
+test("测试 front 和 back", () => {
+  const pq = new PriorityQueue();
+  pq.enqueue("A", 1);
+  pq.enqueue("B", 2);
+  expect(pq.front().toString()).toBe("A-1");
+  expect(pq.back().toString()).toBe("B-2");
 });
 
 test("测试 size", () => {
+  const pq = new PriorityQueue();
+  pq.enqueue("A", 1);
+  pq.enqueue("B", 2);
   expect(pq.size()).toBe(2);
   pq.dequeue();
   pq.dequeue();
@@ -29,6 +35,7 @@ test("测试 size", () => {
 });
 
 test("测试 isEmpty", () => {
+  const pq = new PriorityQueue();
   expect(pq.isEmpty()).toBe(true);
   pq.enqueue("D", 4);
   expect(pq.isEmpty()).toBe(false);

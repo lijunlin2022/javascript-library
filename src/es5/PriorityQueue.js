@@ -63,9 +63,3 @@ PriorityQueue.prototype.toString = function () {
 module.exports = {
   PriorityQueue
 };
-
-// var pq = new PriorityQueue();
-// pq.enqueue("A", 1);
-// pq.enqueue("B", 3);
-// pq.enqueue("C", 2);
-// console.log(pq.toString());
