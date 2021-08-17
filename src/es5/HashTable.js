@@ -42,6 +42,11 @@ HashTable.prototype.set = function (key, value) {
   // 4. 如果不是修改数据, 则新增数据
   bucket.push([key, value]);
   this.count += 1;
+
+  // 判断是否需要扩容
+  if (this.count > this.limit * 0.75) {
+    this.resize(this.limit * 2);
+  }
 }
 
 HashTable.prototype.get = function (key) {
@@ -73,6 +78,11 @@ HashTable.prototype.remove = function (key) {
     if (tuple[0] === key) {
       bucket.splice(i, 1);
       this.count -= 1;
+
+      if (this.limit > 7 && this.count < this.limit * 0.25) {
+        this.resize(Math.floor(this.limit / 2));
+      }
+
       return tuple[1];
     }
   }

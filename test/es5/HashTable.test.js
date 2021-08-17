@@ -59,6 +59,22 @@ test("测试 resize 方法", () => {
   expect(ht.get("key7")).toBe("value7");
 });
 
+test("测试 set 和 remove 的自动扩容与缩容", () => {
+  const ht = new HashTable();
+  ht.set("key1", "value1");
+  ht.set("key2", "value2");
+  ht.set("key3", "value3");
+  ht.set("key4", "value4");
+  ht.set("key5", "value5");
+  console.log(ht.toString());
+  ht.set("key6", "value6");
+  console.log(ht.toString()); // 超过 7 * 0.75 = 5.25 应该扩容
+  ht.remove("key6");
+  ht.remove("key5");
+  ht.remove("key4");
+  console.log(ht.toString()); // 小于 14 * 0.25 = 3.5 应该缩容
+});
+
 test("测试 toString", () => {
   const ht = new HashTable();
   expect(ht.toString()).toBe("[[], [], [], [], [], [], []]");
