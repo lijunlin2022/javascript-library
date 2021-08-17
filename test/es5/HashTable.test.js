@@ -10,8 +10,34 @@ test("测试 hashFun", () => {
 
 test("测试 set 和 get 方法", () => {
   const ht = new HashTable();
+  expect(ht.get("key1")).toBe(null);
   ht.set("key1", "value1");
   expect(ht.get("key1")).toBe("value1");
+});
+
+test("测试 remove 方法", () => {
+  const ht = new HashTable();
+  ht.set("key1", "value1");
+  ht.remove("key1");
+  expect(ht.get("key1")).toBe(null);
+});
+
+test("测试 isEmpty 方法", () => {
+  const ht = new HashTable();
+  expect(ht.isEmpty()).toBe(true);
+  ht.set("key1", "value1");
+  expect(ht.isEmpty()).toBe(false);
+  ht.remove("key1");
+  expect(ht.isEmpty()).toBe(true);
+});
+
+test("测试 size 方法", () => {
+  const ht = new HashTable();
+  expect(ht.size()).toBe(0);
+  ht.set("key1", "value1");
+  expect(ht.size()).toBe(1);
+  ht.remove("key1");
+  expect(ht.size()).toBe(0);
 });
 
 test("测试 toString", () => {

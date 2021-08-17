@@ -41,6 +41,7 @@ HashTable.prototype.set = function (key, value) {
   }
   // 4. 如果不是修改数据, 则新增数据
   bucket.push([key, value]);
+  this.count += 1;
 }
 
 HashTable.prototype.get = function (key) {
@@ -59,6 +60,31 @@ HashTable.prototype.get = function (key) {
   }
 
   return null;
+}
+
+HashTable.prototype.remove = function (key) {
+  var index = this.hashFun(key, this.limit);
+  var bucket = this.storage[index];
+  if (bucket == null) {
+    return null;
+  }
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      bucket.splice(i, 1);
+      this.count -= 1;
+      return tuple[1];
+    }
+  }
+  return null;
+}
+
+HashTable.prototype.isEmpty = function () {
+  return this.count === 0;
+}
+
+HashTable.prototype.size = function () {
+  return this.count;
 }
 
 HashTable.prototype.toString = function () {
