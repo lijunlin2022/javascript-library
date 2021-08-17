@@ -43,6 +43,24 @@ HashTable.prototype.set = function (key, value) {
   bucket.push([key, value]);
 }
 
+HashTable.prototype.get = function (key) {
+  var index = this.hashFun(key, this.limit);
+  var bucket = this.storage[index];
+
+  if (bucket == null) {
+    return null;
+  }
+
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      return tuple[1];
+    }
+  }
+
+  return null;
+}
+
 HashTable.prototype.toString = function () {
   var sArr = [];
   for (var i = 0; i < this.limit; i++) {
