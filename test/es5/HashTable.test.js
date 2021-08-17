@@ -40,6 +40,25 @@ test("测试 size 方法", () => {
   expect(ht.size()).toBe(0);
 });
 
+test("测试 resize 方法", () => {
+  const ht = new HashTable();
+  ht.set("key1", "value1");
+  ht.set("key2", "value2");
+  ht.set("key3", "value3");
+  ht.set("key4", "value4");
+  ht.set("key5", "value5");
+  ht.set("key6", "value6");
+  ht.set("key7", "value7");
+  ht.resize(17);
+  expect(ht.get("key1")).toBe("value1");
+  expect(ht.get("key2")).toBe("value2");
+  expect(ht.get("key3")).toBe("value3");
+  expect(ht.get("key4")).toBe("value4");
+  expect(ht.get("key5")).toBe("value5");
+  expect(ht.get("key6")).toBe("value6");
+  expect(ht.get("key7")).toBe("value7");
+});
+
 test("测试 toString", () => {
   const ht = new HashTable();
   expect(ht.toString()).toBe("[[], [], [], [], [], [], []]");

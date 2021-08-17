@@ -87,6 +87,28 @@ HashTable.prototype.size = function () {
   return this.count;
 }
 
+HashTable.prototype.resize = function (newLimit) {
+  var oldStorage = this.storage;
+
+  // 重置所有的属性
+  this.storage = [];
+  this.count = 0;
+  this.limit = newLimit;
+
+  for (var i = 0; i < oldStorage.length; i++) {
+    var bucket = oldStorage[i];
+
+    if (bucket == null) {
+      continue;
+    }
+
+    for (var j = 0; j < bucket.length; j++) {
+      var tuple = bucket[j];
+      this.set(tuple[0], tuple[1]);
+    }
+  }
+}
+
 HashTable.prototype.toString = function () {
   var sArr = [];
   for (var i = 0; i < this.limit; i++) {
