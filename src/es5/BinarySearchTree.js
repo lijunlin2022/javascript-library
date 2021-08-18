@@ -50,6 +50,26 @@ BinarySearchTree.prototype.insertNode = function (node, newNode) {
   }
 }
 
+BinarySearchTree.prototype.preorderTraversal = function (handler) {
+  this.preorderTraversalNode(this.root, handler);
+}
+
+BinarySearchTree.prototype.preorderTraversalNode = function (node, handler) {
+  if (node != null) {
+    handler(node.key);
+    this.preorderTraversalNode(node.left, handler);
+    this.preorderTraversalNode(node.right, handler);
+  }
+}
+
+BinarySearchTree.prototype.preorderTraversalToString = function () {
+  var arr = [];
+  this.preorderTraversal(function (key) {
+    arr.push(key);
+  });
+  return "[" + arr.join(", ") + "]";
+}
+
 module.exports = {
   BinarySearchTree
 };
