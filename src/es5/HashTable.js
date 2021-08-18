@@ -45,7 +45,8 @@ HashTable.prototype.set = function (key, value) {
 
   // 判断是否需要扩容
   if (this.count > this.limit * 0.75) {
-    this.resize(this.limit * 2);
+    var primeNum = this.getPrimeNum(this.limit * 2);
+    this.resize(primeNum);
   }
 }
 
@@ -80,7 +81,8 @@ HashTable.prototype.remove = function (key) {
       this.count -= 1;
 
       if (this.limit > 7 && this.count < this.limit * 0.25) {
-        this.resize(Math.floor(this.limit / 2));
+        var primeNum = this.getPrimeNum(Math.floor(this.limit / 2));
+        this.resize(primeNum);
       }
 
       return tuple[1];
@@ -117,6 +119,23 @@ HashTable.prototype.resize = function (newLimit) {
       this.set(tuple[0], tuple[1]);
     }
   }
+}
+
+HashTable.prototype.isPrimeNum = function (num) {
+  var tmp = parseInt(Math.sqrt(num));
+  for (var i = 2; i <= tmp; i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+HashTable.prototype.getPrimeNum = function (num) {
+  while (!this.isPrimeNum(num)) {
+    num += 1;
+  }
+  return num;
 }
 
 HashTable.prototype.toString = function () {

@@ -68,11 +68,28 @@ test("测试 set 和 remove 的自动扩容与缩容", () => {
   ht.set("key5", "value5");
   console.log(ht.toString());
   ht.set("key6", "value6");
-  console.log(ht.toString()); // 超过 7 * 0.75 = 5.25 应该扩容
+  console.log(ht.toString()); // 超过 7 * 0.75 = 5.25 应该扩容到 17
   ht.remove("key6");
   ht.remove("key5");
-  ht.remove("key4");
-  console.log(ht.toString()); // 小于 14 * 0.25 = 3.5 应该缩容
+  console.log(ht.toString()); // 小于 17 * 0.25 = 4.25 应该缩容到 7
+});
+
+test("测试 isPrimeNum 方法", () => {
+  const ht = new HashTable();
+  expect(ht.isPrimeNum(0)).toBe(true);
+  expect(ht.isPrimeNum(1)).toBe(true);
+  expect(ht.isPrimeNum(2)).toBe(true);
+  expect(ht.isPrimeNum(3)).toBe(true);
+  expect(ht.isPrimeNum(10)).toBe(false);
+  expect(ht.isPrimeNum(27)).toBe(false);
+  expect(ht.isPrimeNum(37)).toBe(true);
+});
+
+test("测试 getPrimeNum 方法", () => {
+  const h1 = new HashTable();
+  expect(h1.getPrimeNum(4)).toBe(5);
+  expect(h1.getPrimeNum(30)).toBe(31);
+  expect(h1.getPrimeNum(36)).toBe(37);
 });
 
 test("测试 toString", () => {
