@@ -70,6 +70,26 @@ BinarySearchTree.prototype.preorderTraversalToString = function () {
   return "[" + arr.join(", ") + "]";
 }
 
+BinarySearchTree.prototype.inorderTraversal = function (handler) {
+  this.inorderTraversalNode(this.root, handler);
+}
+
+BinarySearchTree.prototype.inorderTraversalNode = function (node, handler) {
+  if (node != null) {
+    this.inorderTraversalNode(node.left, handler);
+    handler(node.key);
+    this.inorderTraversalNode(node.right, handler);
+  }
+}
+
+BinarySearchTree.prototype.inorderTraversalToString = function (node, handler) {
+  var arr = [];
+  this.inorderTraversal(function (key) {
+    arr.push(key);
+  });
+  return "[" + arr.join(", ") + "]";
+}
+
 module.exports = {
   BinarySearchTree
 };
