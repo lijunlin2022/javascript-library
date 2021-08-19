@@ -70,6 +70,35 @@ Graph.prototype.bfsToString = function (initV) {
   return "[" + arr.join(", ") + "]";
 }
 
+Graph.prototype.dfs = function (initV, handler) {
+  var colorMap = this.initializeColor();
+  this.dfsVisit(initV, colorMap, handler);
+}
+
+Graph.prototype.dfsVisit = function (v, colorMap, handler) {
+  // 设置颜色
+  colorMap.set(v, "gray");
+  // 处理节点
+  handler(v);
+  // 递归访问相邻的节点
+  var vAdjList = this.edges.get(v);
+  vAdjList.forEach(item => {
+    if (colorMap.get(item) === "white") {
+      this.dfsVisit(item, colorMap, handler);
+    }
+  });
+
+  colorMap.set(v, "black");
+}
+
+Graph.prototype.dfsToString = function (initV) {
+  var arr = [];
+  this.dfs(initV, function (v) {
+    arr.push(v);
+  });
+  return "[" + arr.join(", ") + "]";
+}
+
 module.exports = {
   Graph
 };
