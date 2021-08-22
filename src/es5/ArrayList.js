@@ -54,6 +54,23 @@ ArrayList.prototype.insertionSort = function () {
   }
 }
 
+ArrayList.prototype.shellSort = function () {
+  var len = this.items.length;
+  var gap = Math.floor(len / 2); // 希尔排序的增量
+  while (gap >= 1) {
+    for (i = gap; i < len; i++) {
+      var tmp = this.items[i];
+      var j = i;
+      while (tmp < this.items[j - gap] && j > gap - 1) {
+        this.items[j] = this.items[j - gap];
+        j -= gap;
+      }
+      this.items[j] = tmp;
+    }
+    gap = Math.floor(gap / 2);
+  }
+}
+
 module.exports = {
   ArrayList
 };
