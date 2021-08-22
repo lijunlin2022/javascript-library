@@ -71,6 +71,51 @@ ArrayList.prototype.shellSort = function () {
   }
 }
 
+// 获取快速排序的枢纽 —— 左中右三个数的中位数
+
+ArrayList.prototype.getPivot = function (left, right) {
+  var mid = Math.floor((left + right) / 2);
+  if (this.items[left] > this.items[mid]) {
+    this.swap(left, mid);
+  }
+  if (this.items[left] > this.items[right]) {
+    this.swap(left, right);
+  }
+  if (this.items[mid] > this.items[right]) {
+    this.swap(mid, right);
+  }
+  // 将中位数放到 right - 1 的位置
+  this.swap(mid, right - 1);
+  return this.items[right - 1];
+}
+
+ArrayList.prototype.quickSort = function () {
+  this.quick(0, this.items.length - 1);
+}
+
+ArrayList.prototype.quick = function (left, right) {
+  // 递归函数结束条件
+  if (left >= right) { return; }
+
+  var pivot = this.getPivot(left, right);
+
+  var i = left;
+  var j = right - 1; // 当前枢纽的位置
+
+  while (i < j) {
+    while (this.items[++i] < pivot) {}
+    while (this.items[--j] > pivot) {}
+    if (i < j) {
+      this.swap(i, j);
+    }
+  }
+
+  this.swap(i, right - 1); // 将枢纽放回正确的位置
+
+  this.quick(left, i - 1);
+  this.quick(i + 1, right);
+}
+
 module.exports = {
   ArrayList
 };
